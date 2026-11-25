@@ -172,7 +172,7 @@
             "Software Developer",
             "Designer",
             "HR Officer"});
-            this.cmbPosition.Location = new System.Drawing.Point(500, 220);
+            this.cmbPosition.Location = new System.Drawing.Point(500, 214);
             this.cmbPosition.Name = "cmbPosition";
             this.cmbPosition.Size = new System.Drawing.Size(220, 40);
             this.cmbPosition.TabIndex = 16;
@@ -199,7 +199,7 @@
             "Sales",
             "Marketing",
             "Accounting"});
-            this.cmbDepartment.Location = new System.Drawing.Point(500, 160);
+            this.cmbDepartment.Location = new System.Drawing.Point(500, 154);
             this.cmbDepartment.Name = "cmbDepartment";
             this.cmbDepartment.Size = new System.Drawing.Size(220, 40);
             this.cmbDepartment.TabIndex = 13;
@@ -222,7 +222,7 @@
             this.txtLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLastName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLastName.ForeColor = System.Drawing.Color.Black;
-            this.txtLastName.Location = new System.Drawing.Point(500, 100);
+            this.txtLastName.Location = new System.Drawing.Point(500, 98);
             this.txtLastName.MaxLength = 100;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(220, 37);
@@ -251,6 +251,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(220, 37);
             this.txtFirstName.TabIndex = 9;
+            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
             // lblFirstName
             // 
