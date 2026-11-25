@@ -21,10 +21,10 @@ namespace Employee_Management_System
             txtID.Enabled = false;
 
             txtEmail.Text = Email;
-            txtEmail.Enabled = false;
+            txtEmail.Enabled = true;
 
             txtPhone.Text = Phone;
-            txtPhone.Enabled = false;
+            txtPhone.Enabled = true;
 
             txtFirstName.Text = FirstName;
             txtLastName.Text = LastName;
@@ -38,11 +38,14 @@ namespace Employee_Management_System
         public string NewDepartment { get; set; }
         public string NewPosition { get; set; }
         public string NewHireDate { get; set; }
+        public string NewEmail { get; set; }
+        public string NewPhone { get; set; }
 
         private bool IsInformationEmpty()
         {
             return string.IsNullOrEmpty(txtFirstName.Text) || string.IsNullOrEmpty(txtLastName.Text) ||
-                string.IsNullOrEmpty(cmbDepartment.Text) || string.IsNullOrEmpty(cmbPosition.Text);
+                string.IsNullOrEmpty(cmbDepartment.Text) || string.IsNullOrEmpty(cmbPosition.Text) ||
+                string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPhone.Text);
         }
 
         private bool IsValidInputs()
@@ -60,6 +63,20 @@ namespace Employee_Management_System
                 return false;
             }
 
+            if (!Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEmail.Focus();
+                return false;
+            }
+
+            if (!Regex.IsMatch(txtPhone.Text, @"^\d{8,15}$"))
+            {
+                MessageBox.Show("Phone number must contain digit only (8 to 15 digit).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPhone.Focus();
+                return false;
+            }
+
             return true;
         }
 
@@ -70,6 +87,7 @@ namespace Employee_Management_System
             NewDepartment = cmbDepartment.Text;
             NewPosition = cmbPosition.Text;
             NewHireDate = dtpHireDate.Text;
+            NewEmail = txtEmail.Text;
 
             this.DialogResult = DialogResult.OK;
             this.Close();

@@ -71,17 +71,26 @@ namespace Employee_Management_System
                 string.IsNullOrEmpty(txtPhone.Text) || string.IsNullOrEmpty(dtpHireDate.Text));
         }
 
-        private bool IsEmailOrPhoneDuplicated(string Email, string Phone)
+        private bool IsEmailDuplicated(string Email)
         {
             foreach (ListViewItem item in lvEmployees.Items)
             {
                 string ExistingEmail = item.SubItems[3].Text;
-                string ExistingPhone = item.SubItems[6].Text;
 
                 if (ExistingEmail == Email)
                 {
                     return true;
                 }
+            }
+
+            return false;
+        }
+
+        private bool IsPhoneDuplicated(string Phone)
+        {
+            foreach (ListViewItem item in lvEmployees.Items)
+            {
+                string ExistingPhone = item.SubItems[6].Text;
 
                 if (ExistingPhone == Phone)
                 {
@@ -170,9 +179,15 @@ namespace Employee_Management_System
                 return;
             }
 
-            if (IsEmailOrPhoneDuplicated(txtEmail.Text, txtPhone.Text))
+            if (IsEmailDuplicated(txtEmail.Text))
             {
-                MessageBox.Show("Email and phone is duplicated.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Email is duplicated.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (IsPhoneDuplicated(txtPhone.Text))
+            {
+                MessageBox.Show("Phone is duplicated.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -228,10 +243,29 @@ namespace Employee_Management_System
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
+                if (frm.NewEmail == Email || frm.NewPhone == Phone) 
+                {
+                    return;
+                }
+
+                if (IsEmailDuplicated(frm.NewEmail))
+                {
+                    MessageBox.Show("Email is duplicated.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (IsPhoneDuplicated(frm.NewPhone))
+                {
+                    MessageBox.Show("Phone is duplicated.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 item.SubItems[1].Text = frm.NewFirstName;
                 item.SubItems[2].Text = frm.NewLastName;
+                item.SubItems[3].Text = frm.NewEmail;
                 item.SubItems[4].Text = frm.NewDepartment;
                 item.SubItems[5].Text = frm.NewPosition;
+                item.SubItems[6].Text = frm.NewPhone;
                 item.SubItems[7].Text = frm.NewHireDate;
             }
         }
